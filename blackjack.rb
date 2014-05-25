@@ -6,10 +6,10 @@ class Blackjack
     @dealer_hand = []
   end
 
-  def deal_hands()
+  def deal_hands(deck)
     2.times do
-      @player_hand << @deck.pop
-      @dealer_hand << @deck.pop
+      @player_hand << deck.pop
+      @dealer_hand << deck.pop
     end
   end
 
@@ -17,13 +17,13 @@ class Blackjack
     @show_dealer_hand = @dealer_hand.pop
   end
 
-  def deal_player()
-    @player_hand << @deck.pop
+  def deal_player(deck)
+    @player_hand << deck.pop
   end
 
-  def deal_dealer()
+  def deal_dealer(deck)
     if score(@dealer_hand) < 17
-      @dealer_hand << @deck.pop
+      @dealer_hand << deck.pop
       deal_dealer()
     end
     score(@dealer_hand)
@@ -53,17 +53,14 @@ class Blackjack
   def bust?()
     score(@player_hand) > 21
   end
+
+  def winner()
+    if @player_hand > @dealer_hand
+      return 1
+    elsif @player_hand < @dealer_hand
+      return -1
+    else
+      return 0
+    end
+  end
 end
-
-a = Blackjack.new
-
-a.deal_hands
-
-puts a.player_hand.inspect
-puts a.dealer_hand.inspect
-puts a.show_dealer_hand.inspect
-
-puts a.score(a.player_hand)
-puts a.deal_dealer
-puts a.dealer_hand.inspect
-
