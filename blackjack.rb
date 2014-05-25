@@ -1,24 +1,9 @@
 class Blackjack
-  attr_reader :deck, :player_hand, :dealer_hand, :show_dealer_hand
+  attr_reader :player_hand, :dealer_hand, :show_dealer_hand
 
   def initialize()
-    @deck = make_deck()
     @player_hand = []
     @dealer_hand = []
-  end
-
-  def make_deck()
-    suits = ["S", "H", "D", "C"]
-    values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-
-    deck = []
-
-    values.each do |value|
-      suits.each do |suit|
-        deck << value + suit
-      end
-    end
-    deck.shuffle!
   end
 
   def deal_hands()
