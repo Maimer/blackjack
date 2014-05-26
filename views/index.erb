@@ -22,9 +22,9 @@ Balance: <%= @wallet.balance %>
 </br></br>
 
 <form action="/" name="action" method="post">
-  <button formmethod="post" name="action" value="hit">Hit Me!</button>
+  <button formmethod="post" name="hit" value="<%= @id %>">Hit Me!</button>
 </form>
 
 <form action="/" name="action" method="post">
-  <button formmethod="post" name="action" value="stand">Stand</button>
+  <button formmethod="post" name="stand" value="<%= @id %>">Stand</button>
 </form>
