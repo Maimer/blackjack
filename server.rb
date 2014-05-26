@@ -15,7 +15,7 @@ get '/' do
 end
 
 post '/' do
-
+  @action = params["action"]
 
   erb :index
 end
