@@ -51,5 +51,7 @@ post '/' do
 
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
 
+  binding.pry
+
   erb :index
 end

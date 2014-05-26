@@ -22,6 +22,6 @@ class Deck
   end
 
   def shuffle_deck
-    @deck.shuffle
+    @deck.shuffle!
   end
 end

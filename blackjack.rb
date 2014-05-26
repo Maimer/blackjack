@@ -24,7 +24,7 @@ class Blackjack
   def deal_dealer(deck)
     if score(@dealer_hand) < 17
       @dealer_hand << deck.pop
-      deal_dealer()
+      deal_dealer(deck)
     end
     @dealer_hand
   end

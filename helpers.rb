@@ -24,8 +24,20 @@ def find_game(id)
 end
 
 def save_game(id, game, deck, wallet)
+  redis = get_connection
+  list_of_games = redis.lrange("blackjack:games", 0, -1)
+
+  list_of_games.each do |line|
+    if line[id] == id
+      redis.hdel(line, "id")
+      redis.hdel(line, "game")
+      redis.hdel(line, "deck")
+      redis.hdel(line, "wallet")
+      redis.hdel(line, "created")
+    end
+  end
+
   game = { id: id, game: game, deck: deck, wallet: wallet, created: Time.now }
 
-  redis = get_connection
   redis.lpush("blackjack:games", game.to_json)
 end
