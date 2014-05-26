@@ -1,16 +1,20 @@
-<% @game.deal_hands(@newdeck) %>
+DEALER:
+
+</br>
+
+<img src="/cards/cardback.png">
+<img src="/cards/<%= @game.show_dealer_hand %>.png">
+
+</br></br>
+
+PLAYER:
+
+</br>
 
 <% @game.player_hand.each do |card| %>
-  <img src="<%= card %>.png">
+  <img src="/cards/<%= card %>.png">
 <% end %>
 
-</br>
-
-<img src="cardback.png">
-<% @game.show_dealer_hand do |card| %>
-  <img src="<%= card %>.png">
-<% end %>
-
-</br>
+</br></br>
 
 Balance: <%= @wallet.balance %>

@@ -2,7 +2,7 @@ class Deck
   attr_reader :deck
 
   def initialize
-    @deck = make_deck(number)
+    @deck = make_deck()
   end
 
   def make_deck(number = 1)
