@@ -1,0 +1,16 @@
+<% @game.deal_hands(@newdeck) %>
+
+<% @game.player_hand.each do |card| %>
+  <img src="<%= card %>.png">
+<% end %>
+
+</br>
+
+<img src="cardback.png">
+<% @game.show_dealer_hand do |card| %>
+  <img src="<%= card %>.png">
+<% end %>
+
+</br>
+
+Balance: <%= @wallet.balance %>

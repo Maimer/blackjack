@@ -18,6 +18,6 @@ class Deck
         end
       end
     end
-    deck.shuffle
+    deck.shuffle!
   end
 end
