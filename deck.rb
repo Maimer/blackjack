@@ -1,8 +1,8 @@
 class Deck
   attr_reader :deck
 
-  def initialize
-    @deck = make_deck()
+  def initialize(deck = make_deck)
+    @deck = deck
   end
 
   def make_deck(number = 1)
@@ -18,6 +18,10 @@ class Deck
         end
       end
     end
-    deck.shuffle!
+    deck
+  end
+
+  def shuffle_deck
+    @deck.shuffle
   end
 end

@@ -16,7 +16,6 @@ def find_game(id)
   game = {}
 
   list_of_games.each do |line|
-    binding.pry
     if line[id] == id
       game = JSON.parse(line, symbolize_names: true)
     end

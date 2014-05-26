@@ -1,9 +1,9 @@
 class Blackjack
   attr_reader :player_hand, :dealer_hand, :show_dealer_hand
 
-  def initialize()
-    @player_hand = []
-    @dealer_hand = []
+  def initialize(player_hand = [], dealer_hand = [])
+    @player_hand = player_hand
+    @dealer_hand = dealer_hand
   end
 
   def deal_hands(deck)
@@ -26,7 +26,7 @@ class Blackjack
       @dealer_hand << deck.pop
       deal_dealer()
     end
-    score(@dealer_hand)
+    @dealer_hand
   end
 
   def score(hand)
