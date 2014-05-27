@@ -49,15 +49,13 @@ post '/' do
 
   if @action == "hit"
     @game.deal_player(@deck.deck)
-    if @game.bust?()
-      @wallet.balance -= 100
-    end
   elsif @action == "stand"
     @game.deal_dealer(@deck.deck)
   elsif @action == "next_hand"
     @wallet.update_balance(@game.winner(), 100)
     @game = Blackjack.new
     @deck = Deck.new
+    @wallet.make_bet(100)
     @game.deal_hands(@deck.shuffle_deck)
   end
 
