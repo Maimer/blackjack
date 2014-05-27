@@ -6,14 +6,14 @@ class Wallet
   end
 
   def make_bet(bet)
-    balance -= bet
+    @balance -= bet
   end
 
   def update_balance(winner, bet)
     if winner == 1
-      balance += bet * 2
+      @balance += bet * 2
     elsif winner == 0
-      balance += bet
+      @balance += bet
     end
   end
 end
