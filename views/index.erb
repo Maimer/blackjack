@@ -1,10 +1,14 @@
 DEALER:
 
 </br>
-
-<img src="/cards/cardback.png">
-<img src="/cards/<%= @game.show_dealer_hand %>.png">
-
+<% if @action=="stand" %>
+  <% @game.dealer_hand.each do |card| %>
+    <img src="/cards/<%= card %>.png">
+  <% end %>
+<% else %>
+  <img src="/cards/cardback.png">
+  <img src="/cards/<%= @game.show_dealer_hand %>.png">
+<% end %>
 </br></br>
 
 PLAYER:
