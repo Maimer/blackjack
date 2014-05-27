@@ -7,7 +7,7 @@ require 'pry'
 
 get '/' do
 
-  get_connection.flushdb
+  # get_connection.flushdb
 
   @game = Blackjack.new
   @deck = Deck.new
@@ -54,6 +54,10 @@ post '/' do
     @deck = Deck.new
     @wallet.make_bet(100)
     @game.deal_hands(@deck.shuffle_deck)
+    if @game.blackjack?()
+      @wallet.update_balance(@game.winner(), 100)
+      @action = "stand"
+    end
   end
 
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)

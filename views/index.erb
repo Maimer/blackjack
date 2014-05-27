@@ -1,10 +1,10 @@
 DEALER:
-<% if @action=="stand" %>
+<% if @action == "stand" %>
   (score: <%= @game.score(@game.dealer_hand) %>)
 <% end %>
 
 </br>
-<% if @action=="stand" %>
+<% if @action == "stand" %>
   <% @game.dealer_hand.each do |card| %>
     <img src="/cards/<%= card %>.png">
   <% end %>
