@@ -1,4 +1,7 @@
 DEALER:
+<% if @action=="stand" %>
+  (score: <%= @game.score(@game.dealer_hand) %>)
+<% end %>
 
 </br>
 <% if @action=="stand" %>
@@ -25,7 +28,7 @@ Balance: <%= @wallet.balance %>
 
 </br></br>
 
-<% if !@game.bust?() || @action == "stand" %>
+<% if !@game.bust?() && @action != "stand" %>
   <form action="/" method="post">
     <button formmethod="post" name="hit" value="<%= @id %>">Hit Me!</button>
   </form>

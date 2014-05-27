@@ -21,10 +21,6 @@ get '/' do
 end
 
 post '/' do
-  @hit = params["hit"]
-  @stand = params["stand"]
-  @nexthand = params["next_hand"]
-
   if params["hit"] != nil
     @id = params["hit"]
     @action = "hit"

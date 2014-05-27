@@ -18,3 +18,4 @@ def save_game(id, game, deck, wallet)
   redis = get_connection
   redis.set(id, { game: game, deck: deck, wallet: wallet, created: Time.now }.to_json)
 end
+
