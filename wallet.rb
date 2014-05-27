@@ -11,7 +11,7 @@ class Wallet
 
   def update_balance(winner, bet)
     if winner == 1
-      balance += (bet + (bet/2))
+      balance += bet * 2
     elsif winner == 0
       balance += bet
     end

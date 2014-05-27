@@ -12,6 +12,7 @@ get '/' do
   @game = Blackjack.new
   @deck = Deck.new
   @wallet = Wallet.new
+  @wallet.make_bet(100)
   @id = rand(36**6).to_s(36)
   @game.deal_hands(@deck.shuffle_deck)
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
@@ -26,16 +27,19 @@ post '/' do
   if params["hit"] != nil
     @id = params["hit"]
     @action = "hit"
-  else
+  elsif
     @id = params["stand"]
     @action = "stand"
+  elsif
+    @id = params["next_hand"]
+    @action = "next hand"
   end
 
   @savedgame = find_game(@id)
 
   @game = Blackjack.new(@savedgame[:game][0], @savedgame[:game][1])
 
-  if @savedgame[:deck].size < 20
+  if @savedgame[:deck].size < 12
     @deck = Deck.new.shuffle_deck
   else
     @deck = Deck.new(@savedgame[:deck])
@@ -45,13 +49,19 @@ post '/' do
 
   if @action == "hit"
     @game.deal_player(@deck.deck)
+    if bust?()
+      @wallet.balance -= 100
+    end
   elsif @action == "stand"
     @game.deal_dealer(@deck.deck)
+  elsif @action == "next_hand"
+    @wallet.update_balance(@game.winner(), 100)
+    @game = Blackjack.new
+    @deck = Deck.new
+    @game.deal_hands(@deck.shuffle_deck)
   end
 
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
-
-  # binding.pry
 
   erb :index
 end
