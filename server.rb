@@ -49,7 +49,7 @@ post '/' do
 
   if @action == "hit"
     @game.deal_player(@deck.deck)
-    if bust?()
+    if @game.bust?()
       @wallet.balance -= 100
     end
   elsif @action == "stand"
