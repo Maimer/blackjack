@@ -25,7 +25,7 @@ Balance: <%= @wallet.balance %>
 
 </br></br>
 
-<% if !@game.bust?() %>
+<% if !@game.bust?() || @action == "stand" %>
   <form action="/" method="post">
     <button formmethod="post" name="hit" value="<%= @id %>">Hit Me!</button>
   </form>
