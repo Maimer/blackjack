@@ -51,7 +51,7 @@ post '/' do
     @game.deal_player(@deck.deck)
   elsif @action == "stand"
     @game.deal_dealer(@deck.deck)
-  elsif @action == "next_hand"
+  elsif @action == "next hand"
     @wallet.update_balance(@game.winner(), 100)
     @game = Blackjack.new
     @deck = Deck.new
