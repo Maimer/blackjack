@@ -5,6 +5,11 @@ require_relative 'wallet.rb'
 require_relative 'helpers.rb'
 require 'pry'
 
+get '/temp' do
+
+  erb :home
+end
+
 get '/' do
 
   # get_connection.flushdb
@@ -12,14 +17,15 @@ get '/' do
   @game = Blackjack.new
   @deck = Deck.new
   @wallet = Wallet.new
-  @wallet.make_bet(100)
+  @bet = 100 #params["initial_bet"]
+  @wallet.make_bet(@bet)
   @id = rand(36**6).to_s(36)
   @game.deal_hands(@deck.shuffle_deck)
   if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
-    @wallet.update_balance(@game.winner(), 100)
+    @wallet.update_balance(@game.winner(), @bet) # was hardcoded to 100
     @action = "blackjack"
   elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
-    @wallet.update_balance(@game.winner(), 100)
+    @wallet.update_balance(@game.winner(), @bet) # was hardcoded to 100
     @action = "stand"
   end
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
@@ -40,6 +46,7 @@ post '/' do
   end
 
   @savedgame = find_game(@id)
+  @bet = 100
 
   @game = Blackjack.new(@savedgame[:game][0], @savedgame[:game][1])
 
@@ -56,19 +63,19 @@ post '/' do
   elsif @action == "stand"
     @game.deal_dealer(@deck.deck)
   elsif @action == "next hand"
-    @wallet.update_balance(@game.winner(), 100)
+    @wallet.update_balance(@game.winner(), @bet)
     if @wallet.balance <= 0
       redirect '/'
     end
     @game = Blackjack.new
     @deck = Deck.new
-    @wallet.make_bet(100)
+    @wallet.make_bet(@bet)
     @game.deal_hands(@deck.shuffle_deck)
     if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
-      @wallet.update_balance(@game.winner(), 100)
+      @wallet.update_balance(@game.winner(), @bet)
       @action = "blackjack"
     elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
-      @wallet.update_balance(@game.winner(), 100)
+      @wallet.update_balance(@game.winner(), @bet)
       @action = "stand"
     end
   end
