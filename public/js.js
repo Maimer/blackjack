@@ -7,3 +7,13 @@ function validateInitialBet() {
     return false;
   }
 }
+
+function validateBet() {
+  if (document.homepage_form.initial_bet.value > 0 &&
+    document.homepage_form.initial_bet.value <= <%= @wallet.balance %>) {
+    return true;
+  } else {
+    document.getElementById("homepage_initial_bet").innerHTML = "*Must be between 0 and <%= @wallet.balance %>";
+    return false;
+  }
+}

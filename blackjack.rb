@@ -54,7 +54,7 @@ class Blackjack
     handcheck = []
     handcheck << hand[0].chop
     handcheck << hand[1].chop
-    if handcheck.include?("A") && handcheck.include?("K", "Q", "J")
+    if handcheck.include?("A") && (handcheck.include?("K") || handcheck.include?("Q") || handcheck.include?("J"))
       return true
     end
     false

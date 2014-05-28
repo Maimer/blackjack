@@ -14,8 +14,8 @@ def find_game(id)
   JSON.parse(redis.get(id), symbolize_names: true)
 end
 
-def save_game(id, game, deck, wallet)
+def save_game(id, game, deck, wallet, bet)
   redis = get_connection
-  redis.setex(id, 3600, { game: game, deck: deck, wallet: wallet, created: Time.now }.to_json)
+  redis.setex(id, 3600, { game: game, deck: deck, wallet: wallet, bet: bet, created: Time.now }.to_json)
 end
 
