@@ -21,16 +21,13 @@ get '/' do
 end
 
 post '/' do
-  @hit = params["hit"]
-  @stand = params["stand"]
-
   if params["hit"] != nil
     @id = params["hit"]
     @action = "hit"
-  elsif
+  elsif params["stand"] != nil
     @id = params["stand"]
     @action = "stand"
-  elsif
+  elsif params["next_hand"] != nil
     @id = params["next_hand"]
     @action = "next hand"
   end

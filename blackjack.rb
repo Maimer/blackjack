@@ -55,9 +55,9 @@ class Blackjack
   end
 
   def winner()
-    if !bust? && score(@player_hand) > score(@dealer_hand)
+    if (!bust? && score(@player_hand) > score(@dealer_hand)) || score(@dealer_hand) > 21
       return 1
-    elsif score(@player_hand) < score(@dealer_hand)
+    elsif bust? || score(@player_hand) < score(@dealer_hand)
       return -1
     else
       return 0
