@@ -43,7 +43,7 @@ class Blackjack
         score += card.to_i
       end
     end
-    if score > 21 && ace_count > 1
+    if score > 21 && ace_count >= 1
       score -= 10
       ace_count -= 1
     end
@@ -54,7 +54,7 @@ class Blackjack
     handcheck = []
     handcheck << @player_hand[0].chop
     handcheck << @player_hand[1].chop
-    if @player_hand.include?(A) && @player_hand.include?(K || Q || J)
+    if @player_hand.include?("A") && @player_hand.include?("K" || "Q" || "J")
       return true
     end
     false

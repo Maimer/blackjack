@@ -15,6 +15,10 @@ get '/' do
   @wallet.make_bet(100)
   @id = rand(36**6).to_s(36)
   @game.deal_hands(@deck.shuffle_deck)
+  if @game.blackjack?()
+    @wallet.update_balance(@game.winner(), 100)
+    @action = "stand"
+  end
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
 
   erb :index
