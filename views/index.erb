@@ -27,7 +27,7 @@
   </br></br>
 
   Score: <%= @game.score(@game.player_hand) %></br>
-  Balance: &nbsp;&#36;<%= @wallet.balance %></br>
+  Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
   Current Bet: &nbsp;&#36;<%= @bet %>
 
   </br></br>
@@ -40,10 +40,16 @@
     <form action="/" method="post">
       <button formmethod="post" name="stand" value="<%= @id %>">Stand</button>
     </form>
+
+    <form action="/" method="post">
+      <button formmethod="post" name="double_down" value="<%= @id %>">Double Down</button>
+    </form>
+
   <% else %>
-    <form action="/" method="post" onsubmit="return validateBet()">
+    <form action="/" method="post" name="new_bet" onsubmit="return validateBet()">
+      <div id="new_bet_warning"></div>
       BET: <input type="text" name="bet" id="bet" size="5" value="100"/>
-      <button formmethod="post" name="next_hand" value="<%= @id %>">Next Hand</button>
+      <button type="submit" formmethod="post" name="next_hand" value="<%= @id %>">Next Hand</button>
     </form>
   <% end %>
 </div>
