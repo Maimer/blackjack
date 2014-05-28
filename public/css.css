@@ -1,5 +1,5 @@
 body {
-  font-family: "Andale Mono", AndaleMono, monospace;
+  font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans serif;
   background:#577A3A url("/images/pool_table.png") repeat;
 }
 
@@ -8,6 +8,22 @@ img {
   box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.home_wrapper h1 {
+.home_wrapper {
+  display: block;
+  width: 45%;
+  margin: 65px auto 0 auto;
+  text-align: center;
+}
 
+.home_wrapper h1 {
+  font-size: 4.6em;
+  margin: -55px 0 0 0;
+  -webkit-text-stroke: 1px black;
+   color: white;
+   text-shadow:
+       3px 3px 0 #000,
+     -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
 }
