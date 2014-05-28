@@ -21,6 +21,7 @@ PLAYER: (score: <%= @game.score(@game.player_hand) %>)
 <% @game.player_hand.each do |card| %>
   <img src="/cards/<%= card %>.png">
 <% end %>
+<% if @action == "blackjack" %> BLACKJACK!!! <% end %>
 
 </br></br>
 

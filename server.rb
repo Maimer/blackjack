@@ -15,7 +15,10 @@ get '/' do
   @wallet.make_bet(100)
   @id = rand(36**6).to_s(36)
   @game.deal_hands(@deck.shuffle_deck)
-  if @game.blackjack?()
+  if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+    @wallet.update_balance(@game.winner(), 100)
+    @action = "blackjack"
+  elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
     @wallet.update_balance(@game.winner(), 100)
     @action = "stand"
   end
@@ -58,7 +61,10 @@ post '/' do
     @deck = Deck.new
     @wallet.make_bet(100)
     @game.deal_hands(@deck.shuffle_deck)
-    if @game.blackjack?()
+    if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+      @wallet.update_balance(@game.winner(), 100)
+      @action = "blackjack"
+    elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
       @wallet.update_balance(@game.winner(), 100)
       @action = "stand"
     end

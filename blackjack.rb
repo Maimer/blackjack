@@ -50,11 +50,11 @@ class Blackjack
     score
   end
 
-  def blackjack?()
+  def blackjack?(hand)
     handcheck = []
-    handcheck << @player_hand[0].chop
-    handcheck << @player_hand[1].chop
-    if @player_hand.include?("A") && @player_hand.include?("K" || "Q" || "J")
+    handcheck << hand[0].chop
+    handcheck << hand[1].chop
+    if handcheck.include?("A") && handcheck.include?("K" || "Q" || "J")
       return true
     end
     false
@@ -65,7 +65,7 @@ class Blackjack
   end
 
   def winner()
-    if @player_hand.size == 2 && blackjack?
+    if @player_hand.size == 2 && blackjack?(@player_hand) && !blackjack?(@dealer_hand)
       return 2
     elsif (!bust? && score(@player_hand) > score(@dealer_hand)) || score(@dealer_hand) > 21
       return 1
