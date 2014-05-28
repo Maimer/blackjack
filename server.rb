@@ -57,6 +57,9 @@ post '/' do
     @game.deal_dealer(@deck.deck)
   elsif @action == "next hand"
     @wallet.update_balance(@game.winner(), 100)
+    if @wallet.balance <= 0
+      redirect '/'
+    end
     @game = Blackjack.new
     @deck = Deck.new
     @wallet.make_bet(100)
