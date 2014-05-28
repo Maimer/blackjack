@@ -10,7 +10,9 @@ class Wallet
   end
 
   def update_balance(winner, bet)
-    if winner == 1
+    if winner == 2
+      @balance += (bet * 2 + bet / 2)
+    elsif winner == 1
       @balance += bet * 2
     elsif winner == 0
       @balance += bet

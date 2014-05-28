@@ -43,11 +43,21 @@ class Blackjack
         score += card.to_i
       end
     end
-    if score > 21 && ace_count > 1
+    if score > 21 && ace_count >= 1
       score -= 10
       ace_count -= 1
     end
     score
+  end
+
+  def blackjack?(hand)
+    handcheck = []
+    handcheck << hand[0].chop
+    handcheck << hand[1].chop
+    if handcheck.include?("A") && handcheck.include?("K" || "Q" || "J")
+      return true
+    end
+    false
   end
 
   def bust?()
@@ -55,7 +65,9 @@ class Blackjack
   end
 
   def winner()
-    if (!bust? && score(@player_hand) > score(@dealer_hand)) || score(@dealer_hand) > 21
+    if @player_hand.size == 2 && blackjack?(@player_hand) && !blackjack?(@dealer_hand)
+      return 2
+    elsif (!bust? && score(@player_hand) > score(@dealer_hand)) || score(@dealer_hand) > 21
       return 1
     elsif bust? || score(@player_hand) < score(@dealer_hand)
       return -1

@@ -7,7 +7,7 @@ require 'pry'
 
 get '/' do
 
-  get_connection.flushdb
+  # get_connection.flushdb
 
   @game = Blackjack.new
   @deck = Deck.new
@@ -15,6 +15,13 @@ get '/' do
   @wallet.make_bet(100)
   @id = rand(36**6).to_s(36)
   @game.deal_hands(@deck.shuffle_deck)
+  if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+    @wallet.update_balance(@game.winner(), 100)
+    @action = "blackjack"
+  elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
+    @wallet.update_balance(@game.winner(), 100)
+    @action = "stand"
+  end
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
 
   erb :index
@@ -50,10 +57,20 @@ post '/' do
     @game.deal_dealer(@deck.deck)
   elsif @action == "next hand"
     @wallet.update_balance(@game.winner(), 100)
+    if @wallet.balance <= 0
+      redirect '/'
+    end
     @game = Blackjack.new
     @deck = Deck.new
     @wallet.make_bet(100)
     @game.deal_hands(@deck.shuffle_deck)
+    if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+      @wallet.update_balance(@game.winner(), 100)
+      @action = "blackjack"
+    elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
+      @wallet.update_balance(@game.winner(), 100)
+      @action = "stand"
+    end
   end
 
   save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance)
