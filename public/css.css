@@ -26,6 +26,9 @@ img {
 }
 
 .home_wrapper h1 {
+  transform:rotate(0deg);
+  -ms-transform:rotate(0deg); /* IE 9 */
+  -webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
   font-size: 3.9em;
   margin: -45px 0 15px 0;
   -webkit-text-stroke: 1px #FFCC33;
@@ -36,6 +39,22 @@ img {
       1px -1px 0 #000,
       -1px 1px 0 #000,
        1px 1px 0 #000;
+}
+
+.home_wrapper img.left {
+  z-index: 1;
+  margin:0 -35px 0 0;
+  transform:rotate(-7deg);
+  -ms-transform:rotate(-7deg); /* IE 9 */
+  -webkit-transform:rotate(-7deg); /* Opera, Chrome, and Safari */
+}
+
+.home_wrapper img.right {
+  z-index: 1;
+  margin:0 0 0 -35px;
+  transform:rotate(7deg);
+  -ms-transform:rotate(7deg); /* IE 9 */
+  -webkit-transform:rotate(7deg); /* Opera, Chrome, and Safari */
 }
 
 .game_wrapper {
