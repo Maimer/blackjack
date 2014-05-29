@@ -21,7 +21,7 @@ img {
 .home_wrapper {
   display: block;
   width: 55%;
-  margin: 20% auto 0 auto;
+  margin: 15% auto 0 auto;
   text-align: center;
 }
 
@@ -58,7 +58,7 @@ img {
 }
 
 .game_wrapper {
-  margin: 8% 0 0 6%;
+  margin: 6% 0 0 6%;
   font-size: 1em;
 }
 
@@ -74,6 +74,10 @@ img {
   height: 220px;
   width: 152px;
   margin: 0 5px 0 0;
+}
+
+.game_wrapper span.subtitle {
+  font-size: 1.2em;
 }
 
 form {
