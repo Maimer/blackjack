@@ -47,6 +47,27 @@ img {
   padding: 0;
   display:inline;
 }
+
+form {
+  display: inline-block;
+}
+
+button {
+  margin: 10px 0 0 0;
+  border-top: 2px solid #FFCC33;
+  border-left: 2px solid #FFCC33;
+  border-right: 2px solid #FF9900;
+  border-bottom: 2px solid #FF9900;
+  padding: 10px 20px !important;
+  font-size: 14px !important;
+  background-color: #003300;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+button :hover {
+  background-color: #CC0000;
+}
 /*
 .game_wrapper img {
   border: 1px #FFF solid;

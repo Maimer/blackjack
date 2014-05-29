@@ -3,8 +3,6 @@ require_relative 'blackjack.rb'
 require_relative 'deck.rb'
 require_relative 'wallet.rb'
 require_relative 'helpers.rb'
-require 'pry'
-
 
 get '/' do
 
@@ -21,10 +19,8 @@ post '/' do
     @id = rand(36**6).to_s(36)
     @game.deal_hands(@deck.shuffle_deck)
     if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
-      @wallet.update_balance(@game.winner(), @bet)
       @action = "blackjack"
     elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
-      @wallet.update_balance(@game.winner(), @bet)
       @action = "stand"
     end
     save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance, @bet)
@@ -40,6 +36,9 @@ post '/' do
     elsif params["next_hand"] != nil
       @id = params["next_hand"]
       @action = "next hand"
+    elsif params["double_down"] != nil
+      @id = params["double_down"]
+      @action = "double_down"
     end
 
     @savedgame = find_game(@id)
@@ -52,10 +51,16 @@ post '/' do
     @wallet = Wallet.new(@savedgame[:wallet])
     @bet = @savedgame[:bet]
 
+    if @action == "double_down"
+      @wallet.make_bet(@bet)
+      @bet *= 2
+      @game.deal_player(@deck.deck)
+      @action = "stand"
+    end
 
     if @action == "hit" && @game.score(@game.player_hand) <= 21
       @game.deal_player(@deck.deck)
-    elsif @action == "stand"
+    elsif @action == "stand" && @game.score(@game.player_hand) <= 21
       @game.deal_dealer(@deck.deck)
     elsif @action == "next hand"
       @wallet.update_balance(@game.winner(), @bet)
@@ -74,10 +79,8 @@ post '/' do
       @wallet.make_bet(@bet)
       @game.deal_hands(@deck.shuffle_deck)
       if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
-        @wallet.update_balance(@game.winner(), @bet)
         @action = "blackjack"
       elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
-        @wallet.update_balance(@game.winner(), @bet)
         @action = "stand"
       end
     end
@@ -85,5 +88,7 @@ post '/' do
     save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance, @bet)
 
     erb :index
+  else
+    redirect '/'
   end
 end
