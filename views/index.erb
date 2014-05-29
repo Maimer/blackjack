@@ -46,10 +46,10 @@
     </form>
 
   <% else %>
-    <form action="/" method="post" name="new_bet" onsubmit="return validateBet()">
+    <form action="/" method="post" name="new_bet" >
       <div id="new_bet_warning"></div>
       BET: <input type="text" name="bet" id="bet" size="5" value="100"/>
-      <button type="submit" formmethod="post" name="next_hand" value="<%= @id %>">Next Hand</button>
+      <button type="submit" formmethod="post" name="next_hand" value="<%= @id %>" onclick="return validateBet()">Next Hand</button>
     </form>
   <% end %>
 </div>
