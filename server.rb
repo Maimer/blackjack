@@ -55,15 +55,12 @@ post '/' do
       @wallet.make_bet(@bet)
       @bet *= 2
       @game.deal_player(@deck.deck)
-      if @game.score(@game.player_hand) <= 21
-        @game.deal_dealer(@deck.deck)
-      end
-      @action = "next hand"
+      @action = "stand"
     end
 
     if @action == "hit" && @game.score(@game.player_hand) <= 21
       @game.deal_player(@deck.deck)
-    elsif @action == "stand"
+    elsif @action == "stand" && @game.score(@game.player_hand) <= 21
       @game.deal_dealer(@deck.deck)
     elsif @action == "next hand"
       @wallet.update_balance(@game.winner(), @bet)

@@ -4,10 +4,12 @@
 
   <h1>BLACKJACK</h1>
 
+  <p>Starting Balance: 1000</p>
   <form name="homepage_form" action="/" method="post" onsubmit="return validateInitialBet()">
     <label for="initial_bet">Starting Bet:</label>
     <input type="text" name="initial_bet" id="initial_bet" size="5" value="100"/>
       <div class="warning" id="homepage_initial_bet"></div>
-    <input type="submit" value="Play!"/>
+    <!-- <input type="submit" value="Play!"/> -->
+    <button formmethod="post">Play!</button>
   </form>
 </div>

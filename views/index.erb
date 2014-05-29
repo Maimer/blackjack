@@ -1,11 +1,11 @@
 <div class="game_wrapper">
   <h3>DEALER</h3>
-  <% if @action == "stand" %>
-    Score: <%= @game.score(@game.dealer_hand) %>
+  <% if @action == "stand" && @game.score(@game.player_hand) <= 21 %>
+    &nbsp;&nbsp;Score: <%= @game.score(@game.dealer_hand) %>
   <% end %>
   </br>
   </br>
-  <% if @action == "stand" %>
+  <% if @action == "stand" && @game.score(@game.player_hand) <= 21 %>
     <% @game.dealer_hand.each do |card| %>
       <img src="/cards/<%= card %>.png">
     <% end %>
@@ -16,7 +16,7 @@
   </br></br>
 
   <h3>PLAYER</h3>
-
+    &nbsp;&nbsp;Score: <%= @game.score(@game.player_hand) %></br>
   </br></br>
 
   <% @game.player_hand.each do |card| %>
@@ -26,7 +26,6 @@
 
   </br></br>
 
-  Score: <%= @game.score(@game.player_hand) %></br>
   Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
   Current Bet: &nbsp;&#36;<%= @bet %>
 
@@ -48,8 +47,10 @@
   <% else %>
     <form action="/" method="post" name="new_bet" onsubmit="return validateBet()">
       <div id="new_bet_warning"></div>
-      BET: <input type="text" name="bet" id="bet" size="5" value="100"/>
-      <button type="submit" formmethod="post" name="next_hand" value="<%= @id %>">Next Hand</button>
+      BET: <input type="text" name="bet" id="bet" size="5" value="100"/></br>
+      <button type="submit" formmethod="post" name="next_hand" value="<%= @id %>">
+      <% if @wallet.balance > 0 %> Next Hand <% else %> Game Over! <% end %>
+      </button>
     </form>
   <% end %>
 </div>
