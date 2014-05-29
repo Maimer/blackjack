@@ -42,9 +42,11 @@
       <button formmethod="post" name="stand" value="<%= @id %>">Stand</button>
     </form>
 
-    <form action="/" method="post">
-      <button formmethod="post" name="double_down" value="<%= @id %>">Double Down</button>
-    </form>
+    <% if @wallet.balance >= @bet %>
+      <form action="/" method="post">
+        <button formmethod="post" name="double_down" value="<%= @id %>">Double Down</button>
+      </form>
+    <% end %>
 
   <% else %>
     <form action="/" method="post" name="new_bet" onsubmit="return validateBet()" >
