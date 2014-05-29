@@ -34,7 +34,7 @@ img {
   -webkit-text-stroke: 1px #FFCC33;
    color: white;
    text-shadow:
-       3px 3px 0 #000,
+       5px 5px 0 #000,
      -1px -1px 0 #000,
       1px -1px 0 #000,
       -1px 1px 0 #000,
@@ -59,6 +59,7 @@ img {
 
 .game_wrapper {
   margin: 8% 0 0 6%;
+  font-size: 1em;
 }
 
 .game_wrapper h3 {
@@ -67,6 +68,12 @@ img {
   margin: 20px 0 0 0;
   padding: 0;
   display:inline;
+}
+
+.game_wrapper img {
+  height: 220px;
+  width: 152px;
+  margin: 0 5px 0 0;
 }
 
 form {
@@ -79,7 +86,7 @@ button {
   border-left: 2px solid #FFCC33;
   border-right: 2px solid #FF9900;
   border-bottom: 2px solid #FF9900;
-  padding: 10px 20px !important;
+  padding: 12px 22px !important;
   font-size: 14px !important;
   background-color: #003300;
   font-weight: bold;
@@ -89,8 +96,3 @@ button {
 button:hover {
   background-color: #005500;
 }
-/*
-.game_wrapper img {
-  border: 1px #FFF solid;
-  padding: 3px;
-}*/
