@@ -20,7 +20,7 @@ img {
 
 .home_wrapper {
   display: block;
-  width: 55%;
+  width: 560px;
   margin: 15% auto 0 auto;
   text-align: center;
 }
@@ -29,6 +29,7 @@ img {
   transform:rotate(0deg);
   -ms-transform:rotate(0deg); /* IE 9 */
   -webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+  z-index: 500;
   font-size: 4.7em;
   margin: -55px 0 15px 0;
   -webkit-text-stroke: 1px #FFCC33;
@@ -87,14 +88,22 @@ img {
 
 .info_block {
   width: 100%;
+  overflow: auto;
 }
 
 .wallet {
-
+  float: left;
+  width: 300px;
 }
 
 .result_alert {
-
+  font-size: 1.6em;
+  float: left;
+  width: 500px;
+  border: 1px solid #FFCC33;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 }
 
 span.subtitle {
