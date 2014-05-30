@@ -50,9 +50,10 @@
 
   <% else %>
     <form action="/" method="post" name="new_bet" onsubmit="return validateBet()" >
-      <div id="new_bet_warning"></div>
-
-      <span class="subtitle" >BET: </span><input type="text" name="bet" id="bet" size="5" value="<%= @bet %>"/></br>
+  <% if @wallet.balance > 0 %>
+      <span class="subtitle" >BET: </span><input type="text" name="bet" id="bet" size="5" value="100"/>
+      <div id="new_bet_warning"></div></br>
+  <% end %>
       <button type="submit" onclick="validateBet" name="next_hand" value="<%= @id %>">
         <% if @wallet.balance > 0 %> Next Hand
         <% else %> Game Over!
@@ -61,3 +62,14 @@
     </form>
   <% end %>
 </div>
+<script type="text/javascript">
+  function validateBet() {
+    if (document.new_bet.bet.value > 0 && document.new_bet.bet.value <= <%= @wallet.balance %>) {
+      document.getElementById("new_bet_warning").innderHTML = "";
+      return true;
+    } else {
+      document.getElementById("new_bet_warning").innerHTML = "<%= "*Must be between 0 and #{@wallet.balance}" %>";
+      return false;
+    };
+  }
+</script>

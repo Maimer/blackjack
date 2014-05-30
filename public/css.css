@@ -62,8 +62,12 @@ img {
   text-decoration: none;
 }
 
+.home_wrapper a:hover {
+  text-shadow: 2px 2px #900000;
+}
+
 .game_wrapper {
-  margin: 6% 0 0 6%;
+  margin: 4% 0 0 6%;
   font-size: 1em;
 }
 
@@ -76,8 +80,8 @@ img {
 }
 
 .game_wrapper img {
-  height: 220px;
-  width: 152px;
+  height: 200px;
+  width: 138px;
   margin: 0 5px 0 0;
 }
 
@@ -104,4 +108,5 @@ button {
 
 button:hover {
   background-color: #005500;
+  text-shadow: 2px 2px #000000;
 }

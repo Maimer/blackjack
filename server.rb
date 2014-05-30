@@ -17,7 +17,7 @@ post '/' do
     @bet = params["initial_bet"].to_i
     @wallet.make_bet(@bet)
     @id = rand(36**6).to_s(36)
-    while find_game(@id)
+    while check_dup(@id)
       @id = rand(36**6).to_s(36)
     end
     @game.deal_hands(@deck.shuffle_deck)
