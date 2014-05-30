@@ -30,7 +30,13 @@
   </br></br>
 
   <span class="subtitle" >Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
-  Current Bet: &nbsp;&#36;<%= @bet %></span>
+  Current Bet: &nbsp;&#36;&nbsp;
+  <% if @action != "stand" && @action != "blackjack" %>
+    <%= @bet %>
+  <% else %>
+    0
+  <% end %>
+    </span>
 
   </br></br>
 
@@ -52,12 +58,12 @@
   <% else %>
     <form action="/" method="post" name="new_bet" onsubmit="return validateBet()" >
       <button type="submit" onclick="validateBet" name="next_hand" value="<%= @id %>">
-        <% if @wallet.balance > 0 %> Next Hand
-        <% else %> Game Over!
+        <% if @wallet.balance == 0 && @game.winner() == -1 %> Game Over!
+        <% else %> Next Hand
         <% end %>
       </button>
       <% if @wallet.balance > 0 %>
-          <span class="subtitle">&nbsp;BET:&nbsp;&#36;</span><input type="text" name="bet" id="bet" size="5" value="100"/>
+          <span class="subtitle">&nbsp;BET:&nbsp;&#36;</span><input type="text" name="bet" id="bet" size="5" value="<%= @bet %>"/>
           &nbsp;<div id="new_bet_warning"></div>
       <% end %>
     </form>
