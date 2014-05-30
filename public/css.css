@@ -20,7 +20,7 @@ img {
 
 .home_wrapper {
   display: block;
-  width: 55%;
+  width: 560px;
   margin: 15% auto 0 auto;
   text-align: center;
 }
@@ -84,6 +84,26 @@ img {
   height: 200px;
   width: 138px;
   margin: 0 5px 0 0;
+}
+
+.info_block {
+  width: 100%;
+  overflow: auto;
+}
+
+.wallet {
+  float: left;
+  width: 300px;
+}
+
+.result_alert {
+  font-size: 1.6em;
+  float: left;
+  width: 500px;
+  border: 1px solid #FFCC33;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 }
 
 span.subtitle {
