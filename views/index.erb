@@ -25,18 +25,32 @@
   <% @game.player_hand.each do |card| %>
     <img src="/cards/<%= card %>.png">
   <% end %>
-  <% if @action == "blackjack" %> BLACKJACK!!! <% end %>
 
   </br></br>
 
-  <span class="subtitle" >Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
-  Current Bet:&nbsp;
-  <% if @action != "stand" && @action != "blackjack" %>
-    &#36;<%= @bet %>
-  <% else %>
-    &#36;0
-  <% end %>
-  </span>
+  <div class="info_block">
+    <div class="wallet">
+      <span class="subtitle" >Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
+      Current Bet:&nbsp;
+      <% if @action != "stand" && @action != "blackjack" %>
+        &#36;<%= @bet %>
+      <% else %>
+        &#36;0
+      <% end %>
+      </span>
+    </div>
+    <div class="result_alert">
+      <% if @action == "blackjack" %> BLACKJACK!
+      <% @action == "hit" && @game.score(@game.player_hand) > 21 %> PLAYER BUST
+      <% elsif @action == "stand" %>
+        <% if @game.score(@game.dealer_hand) > 21 %> DEALER BUST
+        <% elsif @game.winner() == -1 %> DEALER WIN
+        <% elsif @game.winner() == 1 %> PLAYER WIN
+        <% elsif @game.winner() == 0 %> PUSH
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 
   </br></br>
 

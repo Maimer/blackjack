@@ -85,6 +85,18 @@ img {
   margin: 0 5px 0 0;
 }
 
+.info_block {
+  width: 100%;
+}
+
+.wallet {
+
+}
+
+.result_alert {
+
+}
+
 span.subtitle {
   font-size: 1.2em;
 }
