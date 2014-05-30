@@ -39,20 +39,16 @@
       <% end %>
       </span>
     </div>
-    <div class="result_alert">
-      <% if @action == "blackjack" %> BLACKJACK!
-      <% @action == "hit" && @game.score(@game.player_hand) > 21 %> PLAYER BUST
-      <% elsif @action == "stand" %>
-        <% if @game.score(@game.dealer_hand) > 21 %> DEALER BUST
-        <% elsif @game.winner() == -1 %> DEALER WIN
-        <% elsif @game.winner() == 1 %> PLAYER WIN
-        <% elsif @game.winner() == 0 %> PUSH
-        <% end %>
+    <% if @action == "blackjack" %><div class="result_alert"> BLACKJACK! </div>
+    <% elsif @game.score(@game.player_hand) > 21 %><div class="result_alert"> PLAYER BUST </div>
+    <% elsif @action == "stand" %>
+      <% if @game.score(@game.dealer_hand) > 21 %><div class="result_alert"> DEALER BUST </div>
+      <% elsif @game.winner() == -1 %><div class="result_alert"> DEALER WINS </div>
+      <% elsif @game.winner() == 1 %><div class="result_alert"> PLAYER WINS </div>
+      <% elsif @game.winner() == 0 %><div class="result_alert"> PUSH </div>
       <% end %>
-    </div>
+    <% end %>
   </div>
-
-  </br></br>
 
   <% if !@game.bust?() && @action != "stand" && @action != "blackjack" %>
     <form action="/" method="post">

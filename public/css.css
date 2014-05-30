@@ -68,7 +68,7 @@ img {
 }
 
 .game_wrapper {
-  margin: 4% 0 0 6%;
+  margin: 3% 0 0 6%;
   font-size: 1em;
 }
 
@@ -93,14 +93,20 @@ img {
 
 .wallet {
   float: left;
-  width: 300px;
+  padding: 10px;
+  margin: 0 15px 0 0;
+  width: 320px;
+  border: 2px solid #FFCC33;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
 }
 
 .result_alert {
-  font-size: 1.6em;
+  padding: 17px 18px 16px 18px;
+  font-size: 1.65em;
   float: left;
-  width: 500px;
-  border: 1px solid #FFCC33;
+  border: 2px solid #FFCC33;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
