@@ -29,6 +29,7 @@ img {
   transform:rotate(0deg);
   -ms-transform:rotate(0deg); /* IE 9 */
   -webkit-transform:rotate(0deg); /* Opera, Chrome, and Safari */
+  z-index: 500;
   font-size: 4.7em;
   margin: -55px 0 15px 0;
   -webkit-text-stroke: 1px #FFCC33;
