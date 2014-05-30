@@ -18,8 +18,9 @@
   </br></br>
 
   <h3>PLAYER</h3>
-    &nbsp;&nbsp;<span class="subtitle" >Score: <%= @game.score(@game.player_hand) %></span></br>
-  </br></br>
+    &nbsp;&nbsp;<span class="subtitle" >Score: <%= @game.score(@game.player_hand) %></span>
+  </br>
+  </br>
 
   <% @game.player_hand.each do |card| %>
     <img src="/cards/<%= card %>.png">
@@ -29,7 +30,13 @@
   </br></br>
 
   <span class="subtitle" >Balance: &nbsp;&#36;<span id="wallet_balance"><%= @wallet.balance %></span></br>
-  Current Bet: &nbsp;&#36;<%= @bet %></span>
+  Current Bet: &nbsp;&#36;&nbsp;
+  <% if @action != "stand" && @action != "blackjack" %>
+    <%= @bet %>
+  <% else %>
+    0
+  <% end %>
+    </span>
 
   </br></br>
 
@@ -50,14 +57,26 @@
 
   <% else %>
     <form action="/" method="post" name="new_bet" onsubmit="return validateBet()" >
-      <div id="new_bet_warning"></div>
-
-      <span class="subtitle" >BET: </span><input type="text" name="bet" id="bet" size="5" value="<%= @bet %>"/></br>
       <button type="submit" onclick="validateBet" name="next_hand" value="<%= @id %>">
-        <% if @wallet.balance > 0 %> Next Hand
-        <% else %> Game Over!
+        <% if @wallet.balance == 0 && @game.winner() == -1 %> Game Over!
+        <% else %> Next Hand
         <% end %>
       </button>
+      <% if @wallet.balance > 0 %>
+          <span class="subtitle">&nbsp;BET:&nbsp;&#36;</span><input type="text" name="bet" id="bet" size="5" value="<%= @bet %>"/>
+          &nbsp;<div id="new_bet_warning"></div>
+      <% end %>
     </form>
   <% end %>
 </div>
+<script type="text/javascript">
+  function validateBet() {
+    if (document.new_bet.bet.value > 0 && document.new_bet.bet.value <= <%= @wallet.balance %>) {
+      document.getElementById("new_bet_warning").innderHTML = "";
+      return true;
+    } else {
+      document.getElementById("new_bet_warning").innerHTML = "<%= "*Must be between 0 and #{@wallet.balance}" %>";
+      return false;
+    };
+  }
+</script>

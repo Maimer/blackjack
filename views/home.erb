@@ -4,12 +4,11 @@
   <h1>BLACKJACK</h1>
 
   <span class="subtitle">
-    <p>Starting Balance: 1000</p>
+    <p>Starting Balance: &#36;1000</p>
     <form name="homepage_form" action="/" method="post" onsubmit="return validateInitialBet()">
-      <label for="initial_bet">Starting Bet:</label>
+      <label for="initial_bet">Starting Bet:&nbsp;&#36;</label>
       <input type="text" name="initial_bet" id="initial_bet" size="5" value="100"/>
         <div class="warning" id="homepage_initial_bet"></div>
-      <!-- <input type="submit" value="Play!"/> -->
       <button formmethod="post">Play!</button>
     </form>
   </span>
@@ -17,8 +16,20 @@
   </br>
   </br>
   <span class="subtitle">Created by:
-    &nbsp;<a href="https://github.com/Maimer">Nicholas Lee</a>&nbsp;&amp;
-    &nbsp;<a href="https://github.com/BrianCox730">Brian Cox</a></br></br>
+    <a href="https://github.com/Maimer">Nicholas Lee</a>&nbsp;&amp;
+    <a href="https://github.com/BrianCox730">Brian Cox</a></br></br>
     <a href="https://github.com/Maimer/blackjack">Github Repo</a>
   </span>
 </div>
+
+<script type="text/javascript">
+  function validateInitialBet() {
+    if (document.homepage_form.initial_bet.value > 0 &&
+      document.homepage_form.initial_bet.value < 1001 ) {
+      return true;
+    } else {
+      document.getElementById("homepage_initial_bet").innerHTML = "*Must be between 0 and 1000";
+      return false;
+    }
+  };
+</script>

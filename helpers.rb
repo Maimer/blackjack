@@ -19,3 +19,10 @@ def save_game(id, game, deck, wallet, bet)
   redis.setex(id, 3600, { game: game, deck: deck, wallet: wallet, bet: bet, created: Time.now }.to_json)
 end
 
+def check_dup(id)
+  redis = get_connection
+  if redis.exists(id) == true
+    return true
+  end
+  return false
+end

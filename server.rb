@@ -17,10 +17,15 @@ post '/' do
     @bet = params["initial_bet"].to_i
     @wallet.make_bet(@bet)
     @id = rand(36**6).to_s(36)
+    while check_dup(@id)
+      @id = rand(36**6).to_s(36)
+    end
     @game.deal_hands(@deck.shuffle_deck)
     if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+      @wallet.update_balance(@game.winner(), @bet)
       @action = "blackjack"
     elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
+      @wallet.update_balance(@game.winner(), @bet)
       @action = "stand"
     end
     save_game(@id, [@game.player_hand, @game.dealer_hand], @deck.deck, @wallet.balance, @bet)
@@ -62,8 +67,9 @@ post '/' do
       @game.deal_player(@deck.deck)
     elsif @action == "stand" && @game.score(@game.player_hand) <= 21
       @game.deal_dealer(@deck.deck)
-    elsif @action == "next hand"
       @wallet.update_balance(@game.winner(), @bet)
+    elsif @action == "next hand"
+
         if params["bet"].to_i > 0 && params["bet"].to_i <= @wallet.balance
           @bet = params["bet"].to_i
         elsif @wallet.balance <= 100
@@ -79,8 +85,10 @@ post '/' do
       @wallet.make_bet(@bet)
       @game.deal_hands(@deck.shuffle_deck)
       if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
+        @wallet.update_balance(@game.winner(), @bet)
         @action = "blackjack"
       elsif @game.blackjack?(@game.player_hand) && @game.blackjack?(@game.dealer_hand)
+        @wallet.update_balance(@game.winner(), @bet)
         @action = "stand"
       end
     end
