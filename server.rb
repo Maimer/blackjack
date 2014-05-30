@@ -69,7 +69,6 @@ post '/' do
       @game.deal_dealer(@deck.deck)
       @wallet.update_balance(@game.winner(), @bet)
     elsif @action == "next hand"
-
         if params["bet"].to_i > 0 && params["bet"].to_i <= @wallet.balance
           @bet = params["bet"].to_i
         elsif @wallet.balance <= 100
