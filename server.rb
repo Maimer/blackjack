@@ -17,6 +17,9 @@ post '/' do
     @bet = params["initial_bet"].to_i
     @wallet.make_bet(@bet)
     @id = rand(36**6).to_s(36)
+    while find_game(@id)
+      @id = rand(36**6).to_s(36)
+    end
     @game.deal_hands(@deck.shuffle_deck)
     if @game.blackjack?(@game.player_hand) && !@game.blackjack?(@game.dealer_hand)
       @action = "blackjack"
