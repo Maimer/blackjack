@@ -43,7 +43,7 @@ class Blackjack
         score += card.to_i
       end
     end
-    if score > 21 && ace_count >= 1
+    while ace_count >= 1 && score > 21
       score -= 10
       ace_count -= 1
     end
