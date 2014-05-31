@@ -54,7 +54,7 @@ class Blackjack
     handcheck = []
     handcheck << hand[0].chop
     handcheck << hand[1].chop
-    if handcheck.include?("A") && (handcheck.include?("K") || handcheck.include?("Q") || handcheck.include?("J") || handcheck.include?("10") )
+    if handcheck.include?("A") && (handcheck.include?("K") || handcheck.include?("Q") || handcheck.include?("J") || handcheck.include?("10"))
       return true
     end
     false
@@ -69,7 +69,7 @@ class Blackjack
       return 2
     elsif (!bust? && score(@player_hand) > score(@dealer_hand)) || score(@dealer_hand) > 21
       return 1
-    elsif bust? || score(@player_hand) < score(@dealer_hand)
+    elsif bust? || score(@player_hand) < score(@dealer_hand) || (@dealer_hand.size == 2 && blackjack?(@dealer_hand) && !blackjack?(@player_hand))
       return -1
     else
       return 0
