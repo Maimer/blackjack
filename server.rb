@@ -55,12 +55,14 @@ post '/' do
     end
     @wallet = Wallet.new(@savedgame[:wallet])
     @bet = @savedgame[:bet]
+    @doubledown = false
 
     if @action == "double_down"
       @wallet.make_bet(@bet)
       @bet *= 2
       @game.deal_player(@deck.deck)
       @action = "stand"
+      @doubledown = true
     end
 
     if @action == "hit" && @game.score(@game.player_hand) <= 21
@@ -68,6 +70,7 @@ post '/' do
     elsif @action == "stand" && @game.score(@game.player_hand) <= 21
       @game.deal_dealer(@deck.deck)
       @wallet.update_balance(@game.winner(), @bet)
+      if @doubledown == true then @bet /= 2 end
     elsif @action == "next hand"
         if params["bet"].to_i > 0 && params["bet"].to_i <= @wallet.balance
           @bet = params["bet"].to_i
