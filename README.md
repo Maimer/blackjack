@@ -8,14 +8,14 @@ This is a remake of the classic card game of Blackjack.  It only uses Sinatra to
 
 ####Game Menu:
 
-![Blackjack Menu]()
+![Blackjack Menu](https://raw.githubusercontent.com/Maimer/blackjack/master/images/blackjack3.png)
 
 ####Sample Gameplay:
 
-![Sample Level]()
+![Sample Gameplay](https://raw.githubusercontent.com/Maimer/blackjack/master/images/blackjack1.png)
 
 ####Sample Gameplay:
 
-![Using a Bomb]()
+![Sample Gameplay](https://raw.githubusercontent.com/Maimer/blackjack/master/images/blackjack2.png)
 
 
