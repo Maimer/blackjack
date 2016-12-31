@@ -3,8 +3,8 @@ require 'redis'
 
 def get_connection
   begin
-    if ENV.has_key?("REDISCLOUD_URL")
-      connection = Redis.new(url: ENV["REDISCLOUD_URL"])
+    if ENV.has_key?("REDIS_URL")
+      connection = Redis.new(url: ENV["REDIS_URL"])
     else
       connection = Redis.new
     end
