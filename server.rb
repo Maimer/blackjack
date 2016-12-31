@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'resolv-replace.rb'
 require_relative 'blackjack.rb'
 require_relative 'deck.rb'
 require_relative 'wallet.rb'
